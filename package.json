@@ -1,0 +1,24 @@
+{
+  "name": "alicorp",
+  "version": "1.0.0",
+  "description": "App Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaidaKary/Alicorp.git"
+  },
+  "author": "Zaida, Andrea y Arianna",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaidaKary/Alicorp/issues"
+  },
+  "homepage": "https://github.com/zaidaKary/Alicorp#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "eslint": "^6.6.0"
+  }
+}
