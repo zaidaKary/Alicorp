@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+coverage/
+node_modules/
+package-lock.json
+.eslintrc.js
+coverage
