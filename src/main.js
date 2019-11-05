@@ -1,5 +1,5 @@
 // Este es el punto de entrada de tu aplicacion
-import router from './routes/index.js';
+import router from './lib/routes/index.js';
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
