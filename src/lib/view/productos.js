@@ -1,4 +1,5 @@
 import { verInfoFb } from "../controller-firebase/controlador-fb.js";
+import {addProduct} from "../controller-firebase/controlador-fb.js"
 export default () => {
     const viewProductos = `
     <section id='portada'>
@@ -26,6 +27,7 @@ export default () => {
     productos.addEventListener('click', () => {
         const datos = document.getElementById('containerCentral');
         datos.innerHTML = '';
+        let aux;
         verInfoFb('products')
         .then((snapshot) => {
                 snapshot.docs.forEach(doc => {
@@ -33,9 +35,16 @@ export default () => {
                     <img class="fotoProducto" src="${doc.data().img}">
                     <p>${doc.data().name}</p>
                     <p>${doc.data().category}</p>
-                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    <button type="button"  id ="products">Comprar</button>     
                     </div>`
+                    aux =  doc.id;
+                   
                 });
+                const comprarProduct = document.getElementById('products')
+                comprarProduct.addEventListener('click',()=>{
+
+                    addProduct(aux);
+                })
 
             })
             .catch(() => console.log('error'));
@@ -52,14 +61,26 @@ export default () => {
                     docu.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
                     <img class="fotoProducto" src="${doc.data().img}">
                     <p>${doc.data().name}</p>
-                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    <button type="button" id="pasta">Comprar</button>    
                     </div>`
                    }
+                   console.log('entramos');
+                   const comprarPasta = document.getElementById('pasta')
+                   comprarPasta.addEventListener('click',()=>{
+                       console.log('comprarPasta');
+                   })
+               
                 });
 
             })
             .catch(() => console.log('error'));
     })
+
+
+ 
+   
+        
+    
 
     const detergentes = divElement.querySelector('#btnDetergentes');
     detergentes.addEventListener('click', () => {
@@ -72,7 +93,7 @@ export default () => {
                         docum.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
                         <img class="fotoProducto" src="${doc.data().img}">
                         <p>${doc.data().name}</p>
-                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                        <button type="button">Comprar</button>   </div>`
                     }
                 });
 
@@ -91,7 +112,7 @@ export default () => {
                         documen.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
                         <img class="fotoProducto" src="${doc.data().img}">
                         <p>${doc.data().name}</p>
-                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                        <button type="button" >Comprar</button>  </div>`
                     }
                 });
 
@@ -111,7 +132,7 @@ export default () => {
                         <img class="fotoProducto" src="${doc.data().img}">
                         <p>${doc.data().name}</p>
                         <p>${doc.data().priceprom}</p>
-                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                        <button type="button" >Comprar</button>   </div>`
                     }
                 });
 
@@ -129,7 +150,7 @@ export default () => {
                         documento.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
                         <img class="fotoProducto" src="${doc.data().img}">
                         <p>${doc.data().name}</p>
-                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                        <button type="button" >Comprar</button>   </div>`
                     }
                 });
 
@@ -139,3 +160,8 @@ export default () => {
 
     return divElement;
 }
+
+
+       
+       
+           
