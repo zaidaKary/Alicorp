@@ -7,7 +7,6 @@ export const login = (email, pass, mensajeError) => {
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
       switch (errorCode) {
         case 'auth/user-not-found':
           mensajeError.innerHTML = '*Usuario no registrado. Por favor, registrarse.';

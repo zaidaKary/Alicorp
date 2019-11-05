@@ -1,5 +1,5 @@
 // Este es el punto de entrada de tu aplicacion
-import {changeView} from './lib/controller/route.js';
+import { changeTmp } from './lib/controller/router.js';
 
 const init = () => {
   // Your web app's Firebase configuration
@@ -19,9 +19,9 @@ const init = () => {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   // firebase.analytics();
-  changeView(window.location.hash);
+  changeTmp(window.location.hash);
   console.log(window);
   console.log(window.location);
-  window.addEventListener('hashchange', () => changeView(window.location.hash));
+  window.addEventListener('hashchange', () => changeTmp(window.location.hash));
 };
 window.addEventListener('load', init);

@@ -1,0 +1,141 @@
+import { verInfoFb } from "../controller-firebase/controlador-fb.js";
+export default () => {
+    const viewProductos = `
+    <section id='portada'>
+        <h1 class="product">Productos</h1>
+        <div class="containerFlex">
+        <div id="containerBotones">
+            <div class="containerBotones">
+            <button id="btnProductos" class="productos">All</button>
+            <button id="btnPastas" class="pastas">Pastas</button>
+            <button id="btnDetergentes" class="detergentes">Detergentes</button>
+            <button id="btnAceites" class="aceites">Aceites</button>
+            <button id="btnConservas" class="conservas">Conservas</button>
+            <button id="btnJabones" class="jabones">Jabones</button>
+            </div>
+        </div>
+        <div id="containerCentral"></div>
+        </div>
+    </section>
+    `;
+
+    const divElement = document.createElement('section');
+    divElement.innerHTML = viewProductos;
+
+    const productos = divElement.querySelector('#btnProductos');
+    productos.addEventListener('click', () => {
+        const datos = document.getElementById('containerCentral');
+        datos.innerHTML = '';
+        verInfoFb('products')
+        .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    datos.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                    <img class="fotoProducto" src="${doc.data().img}">
+                    <p>${doc.data().name}</p>
+                    <p>${doc.data().category}</p>
+                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    </div>`
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+
+    const pastas = divElement.querySelector('#btnPastas');
+    pastas.addEventListener('click', () => {
+        const docu = document.getElementById('containerCentral');
+        docu.innerHTML = '';
+        verInfoFb('products')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                   if(doc.data().category==='pastas'){
+                    docu.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                    <img class="fotoProducto" src="${doc.data().img}">
+                    <p>${doc.data().name}</p>
+                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    </div>`
+                   }
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+
+    const detergentes = divElement.querySelector('#btnDetergentes');
+    detergentes.addEventListener('click', () => {
+        const docum = document.getElementById('containerCentral');
+        docum.innerHTML = '';
+        verInfoFb('products')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    if (doc.data().category === 'detergentes') {
+                        docum.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                        <img class="fotoProducto" src="${doc.data().img}">
+                        <p>${doc.data().name}</p>
+                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                    }
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+
+    const aceites = divElement.querySelector('#btnAceites');
+    aceites.addEventListener('click', () => {
+        const documen = document.getElementById('containerCentral');
+        documen.innerHTML = '';
+        verInfoFb('products')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    if (doc.data().category === 'aceites') {
+                        documen.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                        <img class="fotoProducto" src="${doc.data().img}">
+                        <p>${doc.data().name}</p>
+                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                    }
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+
+    const conservas = divElement.querySelector('#btnConservas');
+    conservas.addEventListener('click', () => {
+        const documentt = document.getElementById('containerCentral');
+        documentt.innerHTML = '';
+        verInfoFb('products')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    if (doc.data().category === 'conservas') {
+                        documentt.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                        <img class="fotoProducto" src="${doc.data().img}">
+                        <p>${doc.data().name}</p>
+                        <p>${doc.data().priceprom}</p>
+                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                    }
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+    const jabones = divElement.querySelector('#btnJabones');
+    jabones.addEventListener('click', () => {
+        const documento = document.getElementById('containerCentral');
+        documento.innerHTML = '';
+        verInfoFb('products')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    if (doc.data().category === 'jabones') {
+                        documento.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                        <img class="fotoProducto" src="${doc.data().img}">
+                        <p>${doc.data().name}</p>
+                        <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>  </div>`
+                    }
+                });
+
+            })
+            .catch(() => console.log('error'));
+    })
+
+    return divElement;
+}
