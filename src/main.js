@@ -1,7 +1,6 @@
 // Este es el punto de entrada de tu aplicacion
-import router from './lib/routes/index.js';
-
-  // Your web app's Firebase configuration
+import { changeView } from './lib/controller/route.js';
+const init =() =>{
   var firebaseConfig = {
     apiKey: "AIzaSyCj2f2ozG16TIOa-uJqQsRZzdTQX1Iqo04",
     authDomain: "alicorp-e8409.firebaseapp.com",
@@ -12,8 +11,17 @@ import router from './lib/routes/index.js';
     appId: "1:989939578907:web:7a62e7ecc2314d3e5be0be",
     measurementId: "G-RSP54LZPJC"
   };
+
+  // Your web app's Firebase configuration
+ 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
+  changeView(window.location.hash);
+  window.addEventListener('hashchange', () => changeView(window.location.hash));// hash -> para que nos traiga despues del #
 
-router();
+};
+window.addEventListener('load', init);
+  
+ 
+ 

@@ -1,4 +1,4 @@
-import { template } from '../utils.js';
+
 
 
 export default () => {
@@ -29,7 +29,7 @@ export default () => {
 </div>
 `;
 
-  template(loginPage);
-  document.getElementById('root').classList.add('container');
-  document.getElementById('body').classList.remove('body-home');
+const divElem = document.createElement('div');
+divElem.innerHTML = loginPage;
+return divElem;
 };
