@@ -1,3 +1,4 @@
+import { login } from '../controller/login-controller.js';
 const loginPage = `
 <figure>
 <img   class="login-logo"src="img/logo.jpg" alt="AlicorpHack">
@@ -29,13 +30,21 @@ const loginPage = `
 const divElem = document.createElement('div');
 divElem.innerHTML = loginPage;
 
-const but = document.getElementById('but');
-but.addEventListener('click',()=>{
-  document.getElementById("root").innerHTML = loginPage;
 
-})
+  const root = document.getElementById("root");
+  root.prepend(divElem); 
 
 
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-console.log(email,password);
+const buttonLogin = document.getElementById('button-login');
+
+buttonLogin.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  try {
+    login( email,password);
+    redirect('home');
+  } catch (error) {
+  //console.log(error.code);
+  }
+});
