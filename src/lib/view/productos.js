@@ -1,7 +1,30 @@
 import { verInfoFb } from "../controller-firebase/controlador-fb.js";
 export default () => {
     const viewProductos = `
-    <section id='portada'>
+    <header>
+    <div class="menuHeader">
+      <div class="headerLogo">
+       <img class="logoalicorp" src="img/logoalicorp.png" alt="Logo alicorp"/>
+      </div>
+    <div class="menuHeaderDerecha">
+      <div>
+        <p>Saldo: 80 soles</p>
+      </div>
+      <div class="infoMenuDerecha">
+        <img class="bolsa" src="img/bolsa.png" alt="Bolsa de compra"/>
+        <p>Ver Bolsa de Compras</p>
+      </div>
+      <div class="infoMenuDerecha">
+        <img class="user" src="img/user.png" alt="Usuario Perfil"/>
+        <p>Julio Guzmán</p>
+      </div>
+      </div>
+    </div>
+    <div class="fondoHeader">
+    <p class="lemaHeader">NUESTROS MEJORES PRODUCTOS</p>
+    </div>
+  </header>
+    <div id='portada'>
         <h1 class="product">Productos</h1>
         <div class="containerFlex">
         <div id="containerBotones">
@@ -16,7 +39,7 @@ export default () => {
         </div>
         <div id="containerCentral"></div>
         </div>
-    </section>
+    </div>
     `;
 
     const divElement = document.createElement('section');
