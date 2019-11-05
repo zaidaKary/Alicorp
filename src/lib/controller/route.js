@@ -1,11 +1,12 @@
 import Home from '../view/home.js';
 import { getProducts } from '../model/getProducts.js';
-// import Login from '../view/login.js';
+import Login from '../view/login.js';
 
 //Creando objeto de los componentes
 const components = {
-    // login: Login,
+     login: Login,
     home: Home,
+
 };
 export const changeView = (route) => {
     const container = document.getElementById('root');
@@ -21,5 +22,9 @@ export const changeView = (route) => {
             };
             getProducts(productsData);
             break;
-    } 
+        case '#/login':
+         container.appendChild(components.login());
+        break;
+    
+  }  
 };

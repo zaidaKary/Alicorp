@@ -13,6 +13,9 @@ const init = () => {
     appId: "1:989939578907:web:7a62e7ecc2314d3e5be0be",
     measurementId: "G-RSP54LZPJC"
   };
+
+  // Your web app's Firebase configuration
+ 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   // firebase.analytics();
