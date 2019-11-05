@@ -1,5 +1,6 @@
 import { signInWithEmailAndPassword } from '../model/modelLoginRegistro.js';
 export const login = (email, pass, mensajeError) => {
+  console.log(email);
   signInWithEmailAndPassword(email, pass)
     .then(() => {
       window.location.hash = '#/home';

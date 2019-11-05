@@ -1,4 +1,4 @@
-
+import { login } from '../controller/login-controller.js';
 
 
 export default () => {
@@ -33,3 +33,17 @@ const divElem = document.createElement('div');
 divElem.innerHTML = loginPage;
 return divElem;
 };
+
+// const buttonLogin =  document.getElementById('button-login');
+
+// buttonLogin.addEventListener('click', () => {
+//   e.preventDefault();
+//   const email = document.getElementById('email').value;
+//   const password = document.getElementById('password').value;
+//   try {
+//     login( email,password);
+//     redirect('home');
+//   } catch (error) {
+//   //console.log(error.code);
+//   }
+// });
