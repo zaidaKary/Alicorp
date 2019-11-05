@@ -1,4 +1,3 @@
-// Este es el punto de entrada de tu aplicacion
 import { changeTmp } from './lib/controller/router.js';
 
 const init = () => {
@@ -13,15 +12,10 @@ const init = () => {
     appId: "1:989939578907:web:7a62e7ecc2314d3e5be0be",
     measurementId: "G-RSP54LZPJC"
   };
-
-  // Your web app's Firebase configuration
- 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  // firebase.analytics();
+  firebase.analytics();
   changeTmp(window.location.hash);
-  console.log(window);
-  console.log(window.location);
   window.addEventListener('hashchange', () => changeTmp(window.location.hash));
 };
 window.addEventListener('load', init);

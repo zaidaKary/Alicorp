@@ -1,48 +1,37 @@
-// import { login } from '../controller/login-controller.js';
+import { login } from '../controller/login-controller.js';
 
 export default () => {
   // Template del login page
   const loginPage = `
-  <figure>
-  <img   class="login-logo"src="img/logo.jpg" alt="AlicorpHack">
-</figure>
-<div>
-
-<div id="error-container">
-  <span id="error"></span>
-</div>
-  
-  
-<form class="form">
-  
-  <input class="inputs " type="email" id="email" autocomplete="email" placeholder= "   ✉    Email" required />
-  <input class="inputs" type="password" id="password" autocomplete  placeholder="   🔒     Contraseña" required />
+  <img src="img/logo.jpg" alt="AlicorpHack">
   <div>
-    <input type="submit" value="Log in" class="buttons" id="button-login" >
-  </div>
- 
-  <div >
-   
-  </div>
-</form>
-</div>
-`;
+    <div id="error-container">
+      <span id="error"></span>
+    </div>
+    <form >
+      <input type="email" id="email" autocomplete="email" placeholder="✉ Email" required />
+      <input type="password" id="password" autocomplete="password" placeholder="🔒 Contraseña" required />
+      <div>
+        <input type="button" value="Log in" id="button-login">
+        <p id ="mensaje-error"></p>
+      </div>
+    </form>
+</div>`;
 
 const divElem = document.createElement('div');
 divElem.innerHTML = loginPage;
+const mensajeError = divElem.querySelector('#mensaje-error');
+const buttonLogin = divElem.querySelector('#button-login');
+buttonLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  const email = divElem.querySelector('#email').value;
+  const password = divElem.querySelector('#password').value;
+  try {
+    login( email, password, mensajeError);
+  } catch (error) {
+  console.log(error);
+  }
+});
 return divElem;
 };
 
-// const buttonLogin =  document.getElementById('button-login');
-
-// buttonLogin.addEventListener('click', () => {
-//   e.preventDefault();
-//   const email = document.getElementById('email').value;
-//   const password = document.getElementById('password').value;
-//   try {
-//     login( email,password);
-//     redirect('home');
-//   } catch (error) {
-//   //console.log(error.code);
-//   }
-// });

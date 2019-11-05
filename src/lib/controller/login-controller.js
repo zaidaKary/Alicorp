@@ -3,7 +3,7 @@ export const login = (email, pass, mensajeError) => {
   console.log(email);
   signInWithEmailAndPassword(email, pass)
     .then(() => {
-      window.location.hash = '#/home';
+      window.location.hash = '#/productos';
     })
     .catch((error) => {
       const errorCode = error.code;
