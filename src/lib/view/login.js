@@ -1,5 +1,4 @@
-import { login } from '../controller/login-controller.js';
-
+// import { login } from '../controller/login-controller.js';
 
 export default () => {
   // Template del login page
@@ -16,8 +15,8 @@ export default () => {
   
 <form class="form">
   
-  <input class="inputs " type="email" id="email" autocomplete="email" placeholder="Email" required />
-  <input class="inputs" type="password" id="password" autocomplete  placeholder="Password" required />
+  <input class="inputs " type="email" id="email" autocomplete="email" placeholder= "   ✉    Email" required />
+  <input class="inputs" type="password" id="password" autocomplete  placeholder="   🔒     Contraseña" required />
   <div>
     <input type="submit" value="Log in" class="buttons" id="button-login" >
   </div>
