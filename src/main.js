@@ -1,7 +1,9 @@
 // Este es el punto de entrada de tu aplicacion
-import { changeView } from './lib/controller/route.js';
-const init =() =>{
-  var firebaseConfig = {
+import changeView from './lib/controller/route.js';
+
+const init = () => {
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
     apiKey: "AIzaSyCj2f2ozG16TIOa-uJqQsRZzdTQX1Iqo04",
     authDomain: "alicorp-e8409.firebaseapp.com",
     databaseURL: "https://alicorp-e8409.firebaseio.com/",
@@ -18,10 +20,6 @@ const init =() =>{
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
   changeView(window.location.hash);
-  window.addEventListener('hashchange', () => changeView(window.location.hash));// hash -> para que nos traiga despues del #
-
+  window.addEventListener('hashchange', () => changeView(window.location.hash));
 };
-window.addEventListener('load', init);
-  
- 
- 
+window.addEventListener('load',init);

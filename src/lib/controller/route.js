@@ -1,26 +1,21 @@
-import Login from '../view/login-view.js';
+import Home from '../view/home.js';
+import Login from '../view/login.js';
 
-// Creando un objeto de los componenetes
+//Creando objeto de los componentes
 const components = {
-  login: Login,
-  home: Home,
-  register: Register,
-  profile: Profile,
-  different: Different,
+    home: Home,
+    login: Login,
 };
-
 export const changeView = (route) => {
-  // nos trae el window.location.hash del main.js cada vez que
-  // cambiemos la URL para poder asociar a cada uno de las vistas
-  const container = document.getElementById('root');
-  container.innerHTML = '';
-  switch (route) {
-    case '#/':
-      container.appendChild(components.login());
-      break;
-   
-    default:
-      container.appendChild(components.different());
-      break;
-  }
+    const container = document.getElementById('root');
+    container.innerHTML = '';
+    switch (route) {
+        case '#/home':
+            container.appendChild(components.home());
+            break;
+    } switch (route) {
+      case '#/login':
+          container.appendChild(components.login());
+          break;
+  }  
 };
