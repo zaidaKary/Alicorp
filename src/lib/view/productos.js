@@ -1,6 +1,7 @@
-import { verInfoFb, addProduct } from "../controller-firebase/controlador-fb.js";
+// import { verInfoFb } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
+import { itemProducts } from '../view/itemProducts.js';
 export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
@@ -53,35 +54,22 @@ export default (arrayObjetProduct) => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
+    //boton cerrar
     const btnCerrar = divElement.querySelector('#btn-cerrar');
     btnCerrar.addEventListener('click', (e) => {
         e.preventDefault();
         cerrarSesion();
         window.location.hash = '';
       });
+      //informacion de usuario para el menu (nombre y saldo)
       const name = divElement.querySelector('#name');
       const saldo = divElement.querySelector('#saldo');
       obtenerUser(name, saldo);
-    const datos = divElement.querySelector('#containerCentral');
-    console.log(arrayObjetProduct);
+      //pintando productos al iniciar sesion
+    const containerProducts = divElement.querySelector('#containerCentral');
     arrayObjetProduct.forEach((element) => {
-        datos.innerHTML += `<div class="contenedorProducto" data-set="${element.id}" data-price="${element.id}">
-                    <img class="fotoProducto" src="${element.img}">
-                    <p>${element.name}</p>
-                    <p>${element.category}</p>
-                    <button type="button" id="añadir">Añadir</button>       
-                    </div>`;
-                    console.log(element.id);
-                    
-    const comprarProduct = datos.querySelector('#añadir');
-    comprarProduct.addEventListener('click', () => {
-        console.log('hola');
-     addProduct(element.id);
- });
-
-                    
+      containerProducts.appendChild(itemProducts(element));
     });
-
  
     // const productos = divElement.querySelector('#btnProductos');
     // productos.addEventListener('click', () => {
