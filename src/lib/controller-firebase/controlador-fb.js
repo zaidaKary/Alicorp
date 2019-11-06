@@ -1,4 +1,4 @@
-export const verInfoFb = string => {
+export const verInfoFb = (string) => {
   return firebase
     .firestore()
     .collection(string)
