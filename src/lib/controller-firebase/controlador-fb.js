@@ -5,6 +5,12 @@ export const verInfoFb = (string,category) => {
     .get();
 };
 
+export const verInfoUser = (string, rol) => {
+  return firebase
+    .firestore()
+    .collection(string).where("roles", "==", rol).orderBy('saldo', 'asc')
+    .get();
+};
 export const verInfoAdmin = (string, rol) => {
   return firebase
     .firestore()

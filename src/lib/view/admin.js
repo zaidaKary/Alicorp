@@ -1,4 +1,4 @@
-import { verInfoAdmin } from "../controller-firebase/controlador-fb.js";
+import { verInfoAdmin, verInfoUser } from "../controller-firebase/controlador-fb.js";
 import { itemAdmin } from '../view/itemAdmin.js';
 import { itemOperario } from '../view/itemOperario.js';
 import { cerrarSesion } from '../model/cerrarSesion.js';
@@ -75,7 +75,7 @@ export default (arrayObjetUsers) => {
    operarios.addEventListener('click', () => {
      const containerUsers = divElement.querySelector('#containerUsers');
      containerUsers.innerHTML = '';
-     verInfoAdmin('users', false)
+     verInfoUser('users', false)
      .then((querySnapshot) => {
        querySnapshot.forEach((doc) => {
         containerUsers.appendChild(itemOperario(doc.data().dni,
