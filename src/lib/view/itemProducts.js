@@ -14,7 +14,6 @@ export const itemProducts = (img, name, price_prom, price_suger, category, id) =
 
     const comprarProduct = divElem.querySelector('#añadir');
     comprarProduct.addEventListener('click', () => {
-    console.log(id);
     addProduct(id);
 });
 // const pintarModal = (name) => {

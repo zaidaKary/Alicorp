@@ -1,4 +1,4 @@
-import { verInfoFb  } from "../controller-firebase/controlador-fb.js";
+import { verInfoFb ,temp } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
 import { itemProducts } from '../view/itemProducts.js';
@@ -51,7 +51,8 @@ export default (arrayObjetProduct) => {
         </div>
     </div>
     `;
-
+    
+    temp('9t3M5cXxtaWkayHE0WTwjNVEEW72').then(data => console.log(data));
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
     //boton cerrar
