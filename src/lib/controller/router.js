@@ -21,7 +21,7 @@ export const changeTmp = (hash) => {
         };
         getProducts(productsData);
         break;
-        case '#/pedidos': 
+        case '#/bolsaCompra': 
         sectionMain.appendChild(components.pedidos());
         break;
     }

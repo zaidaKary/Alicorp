@@ -16,7 +16,7 @@ export default (arrayObjetProduct) => {
         </div>
         <p>Saldo disponible</p>
       </div>
-      <div class="infoMenuDerecha">
+      <div id="btn-bolsacompra" class="infoMenuDerecha">
         <img class="bolsa" src="img/bolsa.png" alt="Bolsa de compra"/>
         <p>Ver Bolsa de Compras</p>
       </div>
@@ -60,6 +60,12 @@ export default (arrayObjetProduct) => {
         e.preventDefault();
         cerrarSesion();
         window.location.hash = '';
+      });
+      //boton ver bolsa de compra
+      const btnBolsacompra = divElement.querySelector('#btn-bolsacompra');
+      btnBolsacompra.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.hash = '#/bolsaCompra';
       });
       //informacion de usuario para el menu (nombre y saldo)
       const name = divElement.querySelector('#name');
