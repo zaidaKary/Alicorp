@@ -1,5 +1,6 @@
 import { verInfoFb } from "../controller-firebase/controlador-fb.js";
-export default () => {
+
+export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
     <div class="menuHeader">
@@ -44,7 +45,15 @@ export default () => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
-
+    const datos = divElement.querySelector('#containerCentral');
+    arrayObjetProduct.forEach((element) => {
+        datos.innerHTML += `<div class="contenedorProducto" data-set="${element.id}" data-price="${element.id}">
+                    <img class="fotoProducto" src="${element.img}">
+                    <p>${element.name}</p>
+                    <p>${element.category}</p>
+                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    </div>`
+    });
     const productos = divElement.querySelector('#btnProductos');
     productos.addEventListener('click', () => {
         const datos = document.getElementById('containerCentral');
