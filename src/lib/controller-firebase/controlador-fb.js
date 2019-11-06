@@ -29,7 +29,6 @@ export const addProduct = async idProduct => {
   if (dataUser.data().saldo >= dataProduct.data().price_prom) {
     let arr = dataUser.data().products;
     arr.push(idProduct);
-    
     let sald = dataUser.data().saldo;
     let price = dataProduct.data().price_prom;
     
@@ -70,4 +69,29 @@ export const getProductUser = async (idUser, cb) => {
     });
     console.log(arrObjProducts);
  cb(arrObjProducts);
+};
+
+export const temp = async(idUser) => {
+  const dataUser = await firebase
+    .firestore()
+    .collection("users")
+    .doc(idUser)
+    .get();
+    const arrProducts = await dataUser.data().products;
+   
+  const arrPromises = arrProducts.map(element => new Promise(resolve =>  firebase
+    .firestore()
+    .collection("products")
+    .doc(element)
+    .get()
+    .then((res) => {
+      console.log(res.data())
+        resolve(res.data());
+      
+    })
+    .catch((err) => {
+     
+      resolve(err);
+    })));
+  return Promise.all(arrPromises);
 };
