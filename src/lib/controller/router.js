@@ -1,6 +1,7 @@
-import Pedidos from '.././view/pedidos.js';
-import Productos from '.././view/productos.js';
-import Login from '.././view/login.js';
+import Pedidos from '../view/pedidos.js';
+import Productos from '../view/productos.js';
+import Login from '../view/login.js';
+import { getProducts } from '../model/getProducts.js';
 
 export const components = {
     login: Login,
@@ -15,7 +16,10 @@ export const changeTmp = (hash) => {
         sectionMain.appendChild(components.login());
         break;
         case '#/productos': 
-        sectionMain.appendChild(components.productos());
+        const productsData = (arrayObjetProduct) => {
+            sectionMain.appendChild(components.productos(arrayObjetProduct));
+        };
+        getProducts(productsData);
         break;
         case '#/pedidos': 
         sectionMain.appendChild(components.pedidos());

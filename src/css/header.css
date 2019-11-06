@@ -1,18 +1,21 @@
 .logoalicorp {
-    width: 15%;
-    height: 37px;
+    width: 213.34px;
+    height: 57px;
+    margin-top: 26px;
+    margin-left: 50px;
 }
 .menuHeader {
     display:flex;
     justify-content: space-between;
-    background: yellowgreen;
-    height: 40px;
+    background: #ffff;
+    height: 103px;
 }
 .menuHeaderDerecha {
     display:flex;
 }
 .infoMenuDerecha {
-    display:flex;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
@@ -29,11 +32,16 @@
     display: contents;
 }
 .fondoHeader {
-    background-image: url("/src/img/fondoLogin.jpg");
-    height: 120px;
+    background-image: url(/src/img/Imagen-portafolio.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 362px;
 }
 .lemaHeader {
     display: flex;
     justify-content: center;
-    padding-top: 51px;
+    font-size: 64px;
+    margin: 0;
+    padding-top: 104px;
+    color: #946763;
 }
