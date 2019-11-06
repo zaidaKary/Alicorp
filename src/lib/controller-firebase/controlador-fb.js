@@ -26,24 +26,22 @@ export const addProduct = async idProduct => {
     .doc(idProduct)
     .get();
    
-  if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
+  if (dataUser.data().saldo >= dataProduct.data().price_prom) {
     let arr = dataUser.data().products;
     arr.push(idProduct);
     
     let sald = dataUser.data().saldo;
-    let cred = dataUser.data().top_credit;
     let price = dataProduct.data().price_prom;
     
-    sald = parseInt(sald + price, 10);
-    cred = cred - price;
+    sald = parseInt(sald - price, 10);
+  
     firebase
       .firestore()
       .collection("users")
       .doc(idUser)
       .update({
         products: arr,
-        saldo: sald,
-        top_credit: cred
+        saldo: sald
       });
   } else {
     alert("Tu credito no es suficiente");

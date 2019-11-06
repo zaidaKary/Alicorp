@@ -1,6 +1,8 @@
 import { verInfoAdmin } from "../controller-firebase/controlador-fb.js";
 import { itemAdmin } from '../view/itemAdmin.js';
 import { itemOperario } from '../view/itemOperario.js';
+import { cerrarSesion } from '../model/cerrarSesion.js';
+
 export default (arrayObjetUsers) => {
     const viewAdmin = `
     <header>
