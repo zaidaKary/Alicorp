@@ -25,6 +25,9 @@
    display: flex;
        
   }
+  .xxdd{
+    display: inline-flex;
+  }
   #containerBotones {
     width: 18%;
     display: flex;
