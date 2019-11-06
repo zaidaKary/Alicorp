@@ -2,6 +2,8 @@
 @import './header.css';
 @import './login.css';
 @import './usuarios.css';
+@import './itemAdmin.css';
+
 /* Estilos del login */
 body {
   margin: 0;
