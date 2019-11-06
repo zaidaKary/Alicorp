@@ -4,6 +4,7 @@ import Login from '../view/login.js';
 import Administrador from '../view/admin.js';
 import { getProducts } from '../model/getProducts.js';
 import { getUsers } from '../model/getUsers.js';
+import { getPedidos } from '../model/getPedidos.js';
 
 export const components = {
     login: Login,
@@ -25,7 +26,10 @@ export const changeTmp = (hash) => {
         getProducts(productsData);
         break;
         case '#/bolsaCompra': 
-        sectionMain.appendChild(components.pedidos());
+        const productosPedido = (arrayObjetUsers) => {
+            sectionMain.appendChild(components.pedidos(arrayObjetUsers));
+        };
+        getPedidos(productosPedido);
         break;
         case '#/administtrador': 
         const usersData = (arrayObjetUsers) => {

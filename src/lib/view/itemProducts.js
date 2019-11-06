@@ -2,7 +2,7 @@ import { addProduct } from "../controller-firebase/controlador-fb.js";
 export const itemProducts = (img, name, price_prom, price_suger, category, id) => {
     const divElem = document.createElement('div');
     const itemProduct = `
-    <div class="contenedorProducto">
+    <div id="contenedorProduct" class="contenedorProducto">
     <img class="fotoProducto" src=${img}>
     <p>${name}</p>
     <p>Precio real: ${price_prom}</p>
@@ -17,6 +17,19 @@ export const itemProducts = (img, name, price_prom, price_suger, category, id) =
     console.log(id);
     addProduct(id);
 });
+// const pintarModal = (name) => {
+//     const divElem = document.createElement('div');
+//     const itemProduct = `
+//     <div>
+//     <p>${name}</p>
+//     </div>`;
+//     divElem.innerHTML = itemProduct;
+//     return divElem;
+// };
+// const modal = divElem.querySelector('#contenedorProduct');
+//     modal.addEventListener('click', () => {
+//         pintarModal(name);    
+// });
     return divElem;
 
 };
