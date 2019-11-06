@@ -13,7 +13,7 @@ export const verInfoAdmin = (string, rol) => {
 };
 
 export const addProduct = async idProduct => {
-  const idUser = firebase.auth().currentUser.uid;;
+  const idUser = firebase.auth().currentUser.uid;
 
   const dataUser = await firebase
     .firestore()
@@ -25,15 +25,16 @@ export const addProduct = async idProduct => {
     .collection("products")
     .doc(idProduct)
     .get();
-    console.log(dataUser.data().dni);
+   
   if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
     let arr = dataUser.data().products;
     arr.push(idProduct);
-    console.log(arr);
+    
     let sald = dataUser.data().saldo;
     let cred = dataUser.data().top_credit;
     let price = dataProduct.data().price_prom;
-    sald = sald + price;
+    
+    sald = parseInt(sald + price, 10);
     cred = cred - price;
     firebase
       .firestore()
@@ -47,4 +48,28 @@ export const addProduct = async idProduct => {
   } else {
     alert("Tu credito no es suficiente");
   }
+};
+
+export const getProductUser = async (idUser, cb) => {
+  
+  const dataUser = await firebase
+    .firestore()
+    .collection("users")
+    .doc(idUser)
+    .get();
+    const arrProducts = dataUser.data().products;
+    let arrObjProducts = [];
+    arrProducts.forEach( async element => {
+      const dataProduct = await firebase
+      .firestore()
+      .collection("products")
+      .doc(element)
+      .get();
+      const  dataProduc=  dataProduct.data();
+     
+      arrObjProducts.push(dataProduc);
+   
+    });
+    console.log(arrObjProducts);
+ cb(arrObjProducts);
 };

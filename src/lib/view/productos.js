@@ -1,4 +1,4 @@
-import { verInfoFb } from "../controller-firebase/controlador-fb.js";
+import { verInfoFb  } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
 import { itemProducts } from '../view/itemProducts.js';
