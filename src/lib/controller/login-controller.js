@@ -18,7 +18,7 @@ export const login = (email, pass, mensajeError) => {
                 window.location.hash = '#/productos';
               }else{
                 console.log(doc.data().roles);
-                window.location.hash = '#/bolsaCompra';
+                window.location.hash = '#/administtrador';
               }
             });
           }).catch((error) => {
