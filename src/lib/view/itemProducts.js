@@ -1,4 +1,4 @@
-// import { addProduct } from "../controller-firebase/controlador-fb.js";
+import { addProduct } from "../controller-firebase/controlador-fb.js";
 export const itemProducts = (data) => {
     const divElem = document.createElement('div');
     const itemProduct = `
@@ -14,8 +14,8 @@ export const itemProducts = (data) => {
     
     const comprarProduct = divElem.querySelector('#añadir');
     comprarProduct.addEventListener('click', () => {
-    console.log('hola');
-    // addProduct(element.id);
+    console.log(data.id);
+    addProduct(data.id);
 });
     return divElem;
 
