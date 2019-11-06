@@ -3,6 +3,7 @@ import Productos from '../view/productos.js';
 import Login from '../view/login.js';
 import Administrador from '../view/admin.js';
 import { getProducts } from '../model/getProducts.js';
+import { getUsers } from '../model/getUsers.js';
 
 export const components = {
     login: Login,
@@ -27,7 +28,10 @@ export const changeTmp = (hash) => {
         sectionMain.appendChild(components.pedidos());
         break;
         case '#/administtrador': 
-        sectionMain.appendChild(components.administrador());
+        const usersData = (arrayObjetUsers) => {
+            sectionMain.appendChild(components.administrador(arrayObjetUsers));
+        };
+        getUsers(usersData);
         break;
     }
 };

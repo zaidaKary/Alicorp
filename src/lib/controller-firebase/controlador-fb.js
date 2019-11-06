@@ -5,6 +5,13 @@ export const verInfoFb = (string,category) => {
     .get();
 };
 
+export const verInfoAdmin = (string, rol) => {
+  return firebase
+    .firestore()
+    .collection(string).where("roles", "==", rol)
+    .get();
+};
+
 export const addProduct = async idProduct => {
   const idUser = firebase.auth().currentUser.uid;;
 

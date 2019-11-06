@@ -1,0 +1,20 @@
+#btnAdministradores,
+#btnOperarios, 
+#btnUsuarios {
+  display: block;
+  width: 90%;
+  padding: 15px 0;
+  margin-bottom: 20px;
+  background: transparent;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  border: none;
+  border-bottom: 1px solid #777;
+  border-top: 1px solid #777;
+}
+#containerUsers {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+  }
