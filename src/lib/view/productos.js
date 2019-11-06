@@ -1,6 +1,41 @@
-import { verInfoFb,addProduct } from "../controller-firebase/controlador-fb.js";
+import { verInfoFb } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
+
+const addProduct = async idProduct => {
+    const dataUser = await firebase
+      .firestore()
+      .collection("users")
+      .doc("12345678abc")
+      .get();
+    const dataProduct = await firebase
+      .firestore()
+      .collection("products")
+      .doc(idProduct)
+      .get();
+      console.log(dataUser.data().top_credit);
+    if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
+      let arr = dataUser.data().products;
+      arr.push(idProduct);
+      console.log(arr);
+      let sald = dataUser.data().saldo;
+      let cred = dataUser.data().top_credit;
+      let price = dataProduct.data().price_prom;
+      sald = sald + price;
+      cred = cred - price;
+      firebase
+        .firestore()
+        .collection("users")
+        .doc("12345678abc")
+        .update({
+          products: arr,
+          saldo: sald,
+          top_credit: cred
+        });
+    } else {
+      alert("Tu credito no es suficiente");
+    }
+  };
 export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
@@ -68,38 +103,40 @@ export default (arrayObjetProduct) => {
                     <img class="fotoProducto" src="${element.img}">
                     <p>${element.name}</p>
                     <p>${element.category}</p>
-                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    <button type="button"  id ="product_${element.id}" onclick="addProduct(${element.id})">Comprar</button>       
                     </div>`
+                    
     });
-    const productos = divElement.querySelector('#btnProductos');
-    productos.addEventListener('click', () => {
-        const datos = document.getElementById('containerCentral');
-        datos.innerHTML = '';
-        let aux;
-        verInfoFb('products')
-        .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    datos.innerHTML += `<div class="contenedorProducto"  data-price="${doc.data().id}">
-                    <img class="fotoProducto" src="${doc.data().img}">
-                    <p>${doc.data().name}</p>
-                    <p>${doc.data().category}</p>
-                    <button type="button"  id ="products" data-set="${doc.id}">Comprar</button>     
-                    </div>`
+    
+    // const productos = divElement.querySelector('#btnProductos');
+    // productos.addEventListener('click', () => {
+    //     const datos = document.getElementById('containerCentral');
+    //     datos.innerHTML = '';
+    //     let aux;
+    //     verInfoFb('products')
+    //     .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                 datos.innerHTML += `<div class="contenedorProducto"  data-price="${doc.data().id}">
+    //                 <img class="fotoProducto" src="${doc.data().img}">
+    //                 <p>${doc.data().name}</p>
+    //                 <p>${doc.data().category}</p>
+    //                 <button type="button"  id ="products" data-set="${doc.id}">Comprar</button>     
+    //                 </div>`
                   
                    
 
-                });
-                const comprarProduct = document.getElementById('products')
-                   comprarProduct.addEventListener('click',()=>{
+    //             });
+    //             const comprarProduct = document.getElementById('products')
+    //                comprarProduct.addEventListener('click',()=>{
                   
-                    console.log(comprarProduct.dataset.set);
-                   // console.log(aux);
-                    addProduct(comprarProduct.dataset.set);
-                })
+    //                 console.log(comprarProduct.dataset.set);
+    //                // console.log(aux);
+    //                 addProduct(comprarProduct.dataset.set);
+    //             })
                 
-            })
-            .catch(() => console.log('error'));
-    })
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
 
     const pastas = divElement.querySelector('#btnPastas');
     pastas.addEventListener('click', () => {
@@ -215,4 +252,3 @@ export default (arrayObjetProduct) => {
 
        
        
-           
