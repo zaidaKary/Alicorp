@@ -1,6 +1,7 @@
 @import './productos.css';
 @import './header.css';
 /* Estilos del login */
-#body {
+body {
   margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
