@@ -1,4 +1,4 @@
-export const verInfoFb = string => {
+export const verInfoFb = (string) => {
   return firebase
     .firestore()
     .collection(string)
@@ -6,17 +6,19 @@ export const verInfoFb = string => {
 };
 
 export const addProduct = async idProduct => {
+  const idUser = firebase.auth().currentUser.uid;;
+
   const dataUser = await firebase
     .firestore()
     .collection("users")
-    .doc("12345678abc")
+    .doc(idUser)
     .get();
   const dataProduct = await firebase
     .firestore()
     .collection("products")
     .doc(idProduct)
     .get();
-    console.log(dataUser.data().top_credit);
+    console.log(dataUser.data().dni);
   if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
     let arr = dataUser.data().products;
     arr.push(idProduct);
@@ -29,7 +31,7 @@ export const addProduct = async idProduct => {
     firebase
       .firestore()
       .collection("users")
-      .doc("12345678abc")
+      .doc(idUser)
       .update({
         products: arr,
         saldo: sald,

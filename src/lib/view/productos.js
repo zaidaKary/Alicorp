@@ -1,41 +1,7 @@
-import { verInfoFb } from "../controller-firebase/controlador-fb.js";
+// import { verInfoFb } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
-
-const addProduct = async idProduct => {
-    const dataUser = await firebase
-      .firestore()
-      .collection("users")
-      .doc("12345678abc")
-      .get();
-    const dataProduct = await firebase
-      .firestore()
-      .collection("products")
-      .doc(idProduct)
-      .get();
-      console.log(dataUser.data().top_credit);
-    if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
-      let arr = dataUser.data().products;
-      arr.push(idProduct);
-      console.log(arr);
-      let sald = dataUser.data().saldo;
-      let cred = dataUser.data().top_credit;
-      let price = dataProduct.data().price_prom;
-      sald = sald + price;
-      cred = cred - price;
-      firebase
-        .firestore()
-        .collection("users")
-        .doc("12345678abc")
-        .update({
-          products: arr,
-          saldo: sald,
-          top_credit: cred
-        });
-    } else {
-      alert("Tu credito no es suficiente");
-    }
-  };
+import { itemProducts } from '../view/itemProducts.js';
 export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
@@ -88,26 +54,23 @@ export default (arrayObjetProduct) => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
+    //boton cerrar
     const btnCerrar = divElement.querySelector('#btn-cerrar');
     btnCerrar.addEventListener('click', (e) => {
         e.preventDefault();
         cerrarSesion();
         window.location.hash = '';
       });
+      //informacion de usuario para el menu (nombre y saldo)
       const name = divElement.querySelector('#name');
       const saldo = divElement.querySelector('#saldo');
       obtenerUser(name, saldo);
-    const datos = divElement.querySelector('#containerCentral');
+      //pintando productos al iniciar sesion
+    const containerProducts = divElement.querySelector('#containerCentral');
     arrayObjetProduct.forEach((element) => {
-        datos.innerHTML += `<div class="contenedorProducto" data-set="${element.id}" data-price="${element.id}">
-                    <img class="fotoProducto" src="${element.img}">
-                    <p>${element.name}</p>
-                    <p>${element.category}</p>
-                    <button type="button"  id ="product_${element.id}" onclick="addProduct(${element.id})">Comprar</button>       
-                    </div>`
-                    
+      containerProducts.appendChild(itemProducts(element));
     });
-    
+ 
     // const productos = divElement.querySelector('#btnProductos');
     // productos.addEventListener('click', () => {
     //     const datos = document.getElementById('containerCentral');
@@ -123,8 +86,7 @@ export default (arrayObjetProduct) => {
     //                 <button type="button"  id ="products" data-set="${doc.id}">Comprar</button>     
     //                 </div>`
                   
-                   
-
+    
     //             });
     //             const comprarProduct = document.getElementById('products')
     //                comprarProduct.addEventListener('click',()=>{
@@ -138,31 +100,31 @@ export default (arrayObjetProduct) => {
     //         .catch(() => console.log('error'));
     // })
 
-    const pastas = divElement.querySelector('#btnPastas');
-    pastas.addEventListener('click', () => {
-        const docu = document.getElementById('containerCentral');
-        docu.innerHTML = '';
-        verInfoFb('products')
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                   if(doc.data().category==='pastas'){
-                    docu.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-                    <img class="fotoProducto" src="${doc.data().img}">
-                    <p>${doc.data().name}</p>
-                    <button type="button" id="pasta">Comprar</button>    
-                    </div>`
-                   }
-                   console.log('entramos');
-                   const comprarPasta = document.getElementById('pasta')
-                   comprarPasta.addEventListener('click',()=>{
-                       console.log('comprarPasta');
-                   })
+    // const pastas = divElement.querySelector('#btnPastas');
+    // pastas.addEventListener('click', () => {
+    //     const docu = document.getElementById('containerCentral');
+    //     docu.innerHTML = '';
+    //     verInfoFb('products')
+    //         .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                if(doc.data().category==='pastas'){
+    //                 docu.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+    //                 <img class="fotoProducto" src="${doc.data().img}">
+    //                 <p>${doc.data().name}</p>
+    //                 <button type="button" id="pasta">Comprar</button>    
+    //                 </div>`
+    //                }
+    //                console.log('entramos');
+    //                const comprarPasta = document.getElementById('pasta')
+    //                comprarPasta.addEventListener('click',()=>{
+    //                    console.log('comprarPasta');
+    //                })
                
-                });
+    //             });
 
-            })
-            .catch(() => console.log('error'));
-    })
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
 
 
  
@@ -170,81 +132,81 @@ export default (arrayObjetProduct) => {
         
     
 
-    const detergentes = divElement.querySelector('#btnDetergentes');
-    detergentes.addEventListener('click', () => {
-        const docum = document.getElementById('containerCentral');
-        docum.innerHTML = '';
-        verInfoFb('products')
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    if (doc.data().category === 'detergentes') {
-                        docum.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-                        <img class="fotoProducto" src="${doc.data().img}">
-                        <p>${doc.data().name}</p>
-                        <button type="button">Comprar</button>   </div>`
-                    }
-                });
+    // const detergentes = divElement.querySelector('#btnDetergentes');
+    // detergentes.addEventListener('click', () => {
+    //     const docum = document.getElementById('containerCentral');
+    //     docum.innerHTML = '';
+    //     verInfoFb('products')
+    //         .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                 if (doc.data().category === 'detergentes') {
+    //                     docum.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+    //                     <img class="fotoProducto" src="${doc.data().img}">
+    //                     <p>${doc.data().name}</p>
+    //                     <button type="button">Comprar</button>   </div>`
+    //                 }
+    //             });
 
-            })
-            .catch(() => console.log('error'));
-    })
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
 
-    const aceites = divElement.querySelector('#btnAceites');
-    aceites.addEventListener('click', () => {
-        const documen = document.getElementById('containerCentral');
-        documen.innerHTML = '';
-        verInfoFb('products')
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    if (doc.data().category === 'aceites') {
-                        documen.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-                        <img class="fotoProducto" src="${doc.data().img}">
-                        <p>${doc.data().name}</p>
-                        <button type="button" >Comprar</button>  </div>`
-                    }
-                });
+    // const aceites = divElement.querySelector('#btnAceites');
+    // aceites.addEventListener('click', () => {
+    //     const documen = document.getElementById('containerCentral');
+    //     documen.innerHTML = '';
+    //     verInfoFb('products')
+    //         .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                 if (doc.data().category === 'aceites') {
+    //                     documen.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+    //                     <img class="fotoProducto" src="${doc.data().img}">
+    //                     <p>${doc.data().name}</p>
+    //                     <button type="button" >Comprar</button>  </div>`
+    //                 }
+    //             });
 
-            })
-            .catch(() => console.log('error'));
-    })
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
 
-    const conservas = divElement.querySelector('#btnConservas');
-    conservas.addEventListener('click', () => {
-        const documentt = document.getElementById('containerCentral');
-        documentt.innerHTML = '';
-        verInfoFb('products')
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    if (doc.data().category === 'conservas') {
-                        documentt.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-                        <img class="fotoProducto" src="${doc.data().img}">
-                        <p>${doc.data().name}</p>
-                        <p>${doc.data().priceprom}</p>
-                        <button type="button" >Comprar</button>   </div>`
-                    }
-                });
+    // const conservas = divElement.querySelector('#btnConservas');
+    // conservas.addEventListener('click', () => {
+    //     const documentt = document.getElementById('containerCentral');
+    //     documentt.innerHTML = '';
+    //     verInfoFb('products')
+    //         .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                 if (doc.data().category === 'conservas') {
+    //                     documentt.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+    //                     <img class="fotoProducto" src="${doc.data().img}">
+    //                     <p>${doc.data().name}</p>
+    //                     <p>${doc.data().priceprom}</p>
+    //                     <button type="button" >Comprar</button>   </div>`
+    //                 }
+    //             });
 
-            })
-            .catch(() => console.log('error'));
-    })
-    const jabones = divElement.querySelector('#btnJabones');
-    jabones.addEventListener('click', () => {
-        const documento = document.getElementById('containerCentral');
-        documento.innerHTML = '';
-        verInfoFb('products')
-            .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    if (doc.data().category === 'jabones') {
-                        documento.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-                        <img class="fotoProducto" src="${doc.data().img}">
-                        <p>${doc.data().name}</p>
-                        <button type="button" >Comprar</button>   </div>`
-                    }
-                });
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
+    // const jabones = divElement.querySelector('#btnJabones');
+    // jabones.addEventListener('click', () => {
+    //     const documento = document.getElementById('containerCentral');
+    //     documento.innerHTML = '';
+    //     verInfoFb('products')
+    //         .then((snapshot) => {
+    //             snapshot.docs.forEach(doc => {
+    //                 if (doc.data().category === 'jabones') {
+    //                     documento.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+    //                     <img class="fotoProducto" src="${doc.data().img}">
+    //                     <p>${doc.data().name}</p>
+    //                     <button type="button" >Comprar</button>   </div>`
+    //                 }
+    //             });
 
-            })
-            .catch(() => console.log('error'));
-    })
+    //         })
+    //         .catch(() => console.log('error'));
+    // })
 
     return divElement;
 }
