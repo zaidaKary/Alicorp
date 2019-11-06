@@ -8,16 +8,21 @@ export default () => {
       </div>
     <div class="menuHeaderDerecha">
       <div>
-        <p>Saldo: 80 soles</p>
+        <p>S/ 200.00</p>
+        <p>Saldo disponible</p>
       </div>
       <div class="infoMenuDerecha">
         <img class="bolsa" src="img/bolsa.png" alt="Bolsa de compra"/>
         <p>Ver Bolsa de Compras</p>
       </div>
       <div class="infoMenuDerecha">
-        <img class="user" src="img/user.png" alt="Usuario Perfil"/>
+        <img class="user" src="img/usuario.png" alt="Usuario Perfil"/>
         <p>Julio Guzmán</p>
       </div>
+      <div class="infoMenuDerecha">
+      <img class="user" src="img/cerrarsesion.png" alt="Usuario Perfil"/>
+      <p>Cerrar Sesión</p>
+    </div>
       </div>
     </div>
     <div class="fondoHeader">
