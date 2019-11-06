@@ -26,16 +26,13 @@ export const addProduct = async idProduct => {
     .doc(idProduct)
     .get();
    
-  if (dataUser.data().top_credit >= dataProduct.data().price_prom) {
+  if (dataUser.data().saldo >= dataProduct.data().price_prom) {
     let arr = dataUser.data().products;
     arr.push(idProduct);
-    
     let sald = dataUser.data().saldo;
-    let cred = dataUser.data().top_credit;
     let price = dataProduct.data().price_prom;
     
-    sald = parseInt(sald + price, 10);
-    cred = cred - price;
+    sald = parseInt(sald - price, 10);
     firebase
       .firestore()
       .collection("users")
@@ -43,7 +40,7 @@ export const addProduct = async idProduct => {
       .update({
         products: arr,
         saldo: sald,
-        top_credit: cred
+    
       });
   } else {
     alert("Tu credito no es suficiente");
@@ -72,4 +69,29 @@ export const getProductUser = async (idUser, cb) => {
     });
     console.log(arrObjProducts);
  cb(arrObjProducts);
+};
+
+export const temp = async(idUser) => {
+  const dataUser = await firebase
+    .firestore()
+    .collection("users")
+    .doc(idUser)
+    .get();
+    const arrProducts = await dataUser.data().products;
+   
+  const arrPromises = arrProducts.map(element => new Promise(resolve =>  firebase
+    .firestore()
+    .collection("products")
+    .doc(element)
+    .get()
+    .then((res) => {
+      console.log(res.data())
+        resolve(res.data());
+      
+    })
+    .catch((err) => {
+     
+      resolve(err);
+    })));
+  return Promise.all(arrPromises);
 };
