@@ -5,6 +5,12 @@ export const verInfoFb = (string,category) => {
     .get();
 };
 
+export const verInfoUser = (string, rol) => {
+  return firebase
+    .firestore()
+    .collection(string).where("roles", "==", rol).orderBy('saldo', 'asc')
+    .get();
+};
 export const verInfoAdmin = (string, rol) => {
   return firebase
     .firestore()
@@ -35,6 +41,7 @@ export const addProduct = async idProduct => {
     let ganAcum = dataUser.data().acum;
      ganAcum = parseInt(ganAcum +(priceSuger-price),10);
     sald = parseInt(sald - price, 10);
+  
     firebase
       .firestore()
       .collection("users")

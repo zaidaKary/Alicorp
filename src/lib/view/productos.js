@@ -47,7 +47,7 @@ export default (arrayObjetProduct) => {
             <button id="btnJabones" class="jabones">Jabones</button>
             </div>
         </div>
-        <div id="containerCentral"></div>
+        <div class="xxdd"id="containerCentral"></div>
         </div>
     </div>
     `;

@@ -1,6 +1,8 @@
-import { verInfoAdmin } from "../controller-firebase/controlador-fb.js";
+import { verInfoAdmin, verInfoUser } from "../controller-firebase/controlador-fb.js";
 import { itemAdmin } from '../view/itemAdmin.js';
 import { itemOperario } from '../view/itemOperario.js';
+import { cerrarSesion } from '../model/cerrarSesion.js';
+
 export default (arrayObjetUsers) => {
     const viewAdmin = `
     <header>
@@ -15,7 +17,7 @@ export default (arrayObjetUsers) => {
         </div>
     </header>
     <div id='portada'>
-        <h1 class="product">Usuarios: Administradores y Operarios</h1>
+         
         <div class="containerFlex">
         <div id="containerBotones">
             <div class="containerBotones">
@@ -24,8 +26,13 @@ export default (arrayObjetUsers) => {
             <button id="btnOperarios">Operarios</button>
             </div>
         </div>
-        <div id="containerUsers"></div>
+        <div class="admidiv">
+          <div class="letragrande">
+            <h1 class="product">Usuarios: Administradores y Operarios</h1>
+          </div> 
+          <div id="containerUsers"></div>
         </div>
+      </div>
     </div>
     `;
 
@@ -73,7 +80,7 @@ export default (arrayObjetUsers) => {
    operarios.addEventListener('click', () => {
      const containerUsers = divElement.querySelector('#containerUsers');
      containerUsers.innerHTML = '';
-     verInfoAdmin('users', false)
+     verInfoUser('users', false)
      .then((querySnapshot) => {
        querySnapshot.forEach((doc) => {
         containerUsers.appendChild(itemOperario(doc.data().dni,
