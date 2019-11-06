@@ -54,21 +54,24 @@ export default () => {
         verInfoFb('products')
         .then((snapshot) => {
                 snapshot.docs.forEach(doc => {
-                    datos.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
+                    datos.innerHTML += `<div class="contenedorProducto"  data-price="${doc.data().id}">
                     <img class="fotoProducto" src="${doc.data().img}">
                     <p>${doc.data().name}</p>
                     <p>${doc.data().category}</p>
-                    <button type="button"  id ="products">Comprar</button>     
+                    <button type="button"  id ="products" data-set="${doc.id}">Comprar</button>     
                     </div>`
-                    aux =  doc.id;
+                  
                    
+
                 });
                 const comprarProduct = document.getElementById('products')
-                comprarProduct.addEventListener('click',()=>{
-
-                    addProduct(aux);
+                   comprarProduct.addEventListener('click',()=>{
+                  
+                    console.log(comprarProduct.dataset.set);
+                   // console.log(aux);
+                    addProduct(comprarProduct.dataset.set);
                 })
-
+                
             })
             .catch(() => console.log('error'));
     })
