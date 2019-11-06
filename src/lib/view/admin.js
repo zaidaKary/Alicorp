@@ -15,7 +15,7 @@ export default (arrayObjetUsers) => {
         </div>
     </header>
     <div id='portada'>
-        <h1 class="product">Usuarios: Administradores y Operarios</h1>
+         
         <div class="containerFlex">
         <div id="containerBotones">
             <div class="containerBotones">
@@ -24,8 +24,13 @@ export default (arrayObjetUsers) => {
             <button id="btnOperarios">Operarios</button>
             </div>
         </div>
-        <div id="containerUsers"></div>
+        <div class="admidiv">
+          <div class="letragrande">
+            <h1 class="product">Usuarios: Administradores y Operarios</h1>
+          </div> 
+          <div id="containerUsers"></div>
         </div>
+      </div>
     </div>
     `;
 

@@ -23,22 +23,29 @@
   }
   .containerFlex {
    display: flex;
-       
+   height: 86vh;
   }
   #containerBotones {
     width: 18%;
     display: flex;
     flex-wrap: wrap;
+    background-color: #268f38;
+    color: aliceblue;
   }
   #containerCentral {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
   }
+  .letragrande{
+    font-size: 22px;
+  }
   .containerBotones {
-    padding: 60px;
+    padding: 35px;
     display: flex;
     flex-direction: column;
+    height: 372px;
+    width: 169px;
   }
   .contenedorProducto {
     width: 22%;
