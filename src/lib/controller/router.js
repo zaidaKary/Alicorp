@@ -4,7 +4,7 @@ import Login from '../view/login.js';
 import Administrador from '../view/admin.js';
 import { getProducts } from '../model/getProducts.js';
 import { getUsers } from '../model/getUsers.js';
-import { getPedidos } from '../model/getPedidos.js';
+import { getProductUser } from '../controller-firebase/controlador-fb.js';
 
 export const components = {
     login: Login,
@@ -12,6 +12,7 @@ export const components = {
     productos: Productos,
     administrador: Administrador,
 };
+
 export const changeTmp = (hash) => {
     const sectionMain = document.getElementById('root');
     sectionMain.innerHTML = '';
@@ -29,7 +30,9 @@ export const changeTmp = (hash) => {
         const productosPedido = (arrayObjetUsers) => {
             sectionMain.appendChild(components.pedidos(arrayObjetUsers));
         };
-        getPedidos(productosPedido);
+        const userId = firebase.auth().currentUser.uid;
+        console.log(userId);
+        getProductUser(userId,productosPedido);
         break;
         case '#/administtrador': 
         const usersData = (arrayObjetUsers) => {

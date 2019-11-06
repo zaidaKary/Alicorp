@@ -1,4 +1,4 @@
-import { itemPedido } from '../view/itemPedido.js';
+// import { itemPedido } from '../view/itemPedido.js';
 export default (arrayObjetUsers) => {
     const viewPedidos = `
     <div>
@@ -10,13 +10,10 @@ export default (arrayObjetUsers) => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewPedidos;
-    const containerBolsa = divElement.querySelector('#containerBolsa');
+     //const containerBolsa = divElement.querySelector('#containerBolsa');
     arrayObjetUsers.forEach((element) => {
-    // element.products.forEach((product) => {
-        // console.log(product);
-        console.log(element);
-        // containerBolsa.appendChild(itemPedido(element.id));
-    // });
+        console.log('acaaaaaaa',element);
+         //containerBolsa.appendChild(itemPedido(element.id,));
     });
     return divElement;
 }

@@ -5,13 +5,11 @@ export const obtenerUser = (name, saldo) => {
         // El usuario ha iniciado sesión.
         const id = firebase.auth().currentUser.uid;
         // Obtención de datos de un documento
-        console.log(id);
+     
         firebase.firestore().collection('users').where("idUser", "==", id).get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
-              console.log("Datos del documento:", doc.data());
-              console.log(doc.data().name);
-              console.log(doc.data().saldo);
+             
               name.textContent = doc.data().name;
               saldo.textContent = doc.data().saldo;
             });
