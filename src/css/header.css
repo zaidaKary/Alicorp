@@ -45,3 +45,6 @@
     padding-top: 104px;
     color: #946763;
 }
+.saldoHeader {
+    display: flex;
+}
