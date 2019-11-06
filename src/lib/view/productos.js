@@ -1,5 +1,6 @@
 import { verInfoFb } from "../controller-firebase/controlador-fb.js";
-export default () => {
+
+export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
     <div class="menuHeader">
@@ -8,16 +9,21 @@ export default () => {
       </div>
     <div class="menuHeaderDerecha">
       <div>
-        <p>Saldo: 80 soles</p>
+        <p>S/ 200.00</p>
+        <p>Saldo disponible</p>
       </div>
       <div class="infoMenuDerecha">
         <img class="bolsa" src="img/bolsa.png" alt="Bolsa de compra"/>
         <p>Ver Bolsa de Compras</p>
       </div>
       <div class="infoMenuDerecha">
-        <img class="user" src="img/user.png" alt="Usuario Perfil"/>
+        <img class="user" src="img/usuario.png" alt="Usuario Perfil"/>
         <p>Julio Guzmán</p>
       </div>
+      <div class="infoMenuDerecha">
+      <img class="user" src="img/cerrarsesion.png" alt="Usuario Perfil"/>
+      <p>Cerrar Sesión</p>
+    </div>
       </div>
     </div>
     <div class="fondoHeader">
@@ -44,7 +50,15 @@ export default () => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
-
+    const datos = divElement.querySelector('#containerCentral');
+    arrayObjetProduct.forEach((element) => {
+        datos.innerHTML += `<div class="contenedorProducto" data-set="${element.id}" data-price="${element.id}">
+                    <img class="fotoProducto" src="${element.img}">
+                    <p>${element.name}</p>
+                    <p>${element.category}</p>
+                    <a href="#/pedidos" class="btnComprar"><span class="spanComprar">Comprar</span></a>     
+                    </div>`
+    });
     const productos = divElement.querySelector('#btnProductos');
     productos.addEventListener('click', () => {
         const datos = document.getElementById('containerCentral');

@@ -1,6 +1,5 @@
 import { signInWithEmailAndPassword } from '../model/modelLoginRegistro.js';
 export const login = (email, pass, mensajeError) => {
-  console.log(email);
   signInWithEmailAndPassword(email, pass)
     .then(() => {
       window.location.hash = '#/productos';
@@ -18,7 +17,7 @@ export const login = (email, pass, mensajeError) => {
           mensajeError.innerHTML = '*El formato del correo ingresado no es válido, verifica e intente de nuevo.';
           break;
         default:
-          mensajeError.innerHTML = 'Se ha producido un error';
+          mensajeError.innerHTML = '*Se ha producido un error';
       }
     });
 };
