@@ -1,5 +1,6 @@
 import { verInfoFb,addProduct } from "../controller-firebase/controlador-fb.js";
-
+import { cerrarSesion } from '../model/cerrarSesion.js';
+import { obtenerUser } from '../model/obtenerUser.js';
 export default (arrayObjetProduct) => {
     const viewProductos = `
     <header>
@@ -9,7 +10,9 @@ export default (arrayObjetProduct) => {
       </div>
     <div class="menuHeaderDerecha">
       <div>
-        <p>S/ 200.00</p>
+      <div class="saldoHeader">
+        <p>S/</p><p id="saldo"></p>
+        </div>
         <p>Saldo disponible</p>
       </div>
       <div class="infoMenuDerecha">
@@ -18,9 +21,9 @@ export default (arrayObjetProduct) => {
       </div>
       <div class="infoMenuDerecha">
         <img class="user" src="img/usuario.png" alt="Usuario Perfil"/>
-        <p>Julio Guzmán</p>
+        <p id="name"></p>
       </div>
-      <div class="infoMenuDerecha">
+      <div id="btn-cerrar" class="infoMenuDerecha">
       <img class="user" src="img/cerrarsesion.png" alt="Usuario Perfil"/>
       <p>Cerrar Sesión</p>
     </div>
@@ -50,6 +53,15 @@ export default (arrayObjetProduct) => {
 
     const divElement = document.createElement('section');
     divElement.innerHTML = viewProductos;
+    const btnCerrar = divElement.querySelector('#btn-cerrar');
+    btnCerrar.addEventListener('click', (e) => {
+        e.preventDefault();
+        cerrarSesion();
+        window.location.hash = '';
+      });
+      const name = divElement.querySelector('#name');
+      const saldo = divElement.querySelector('#saldo');
+      obtenerUser(name, saldo);
     const datos = divElement.querySelector('#containerCentral');
     arrayObjetProduct.forEach((element) => {
         datos.innerHTML += `<div class="contenedorProducto" data-set="${element.id}" data-price="${element.id}">
