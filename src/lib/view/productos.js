@@ -1,4 +1,4 @@
-// import { verInfoFb } from "../controller-firebase/controlador-fb.js";
+import { verInfoFb } from "../controller-firebase/controlador-fb.js";
 import { cerrarSesion } from '../model/cerrarSesion.js';
 import { obtenerUser } from '../model/obtenerUser.js';
 import { itemProducts } from '../view/itemProducts.js';
@@ -68,146 +68,94 @@ export default (arrayObjetProduct) => {
       //pintando productos al iniciar sesion
     const containerProducts = divElement.querySelector('#containerCentral');
     arrayObjetProduct.forEach((element) => {
-      containerProducts.appendChild(itemProducts(element));
+      containerProducts.appendChild(itemProducts(element.img, element.name,
+        element.price_prom, element.price_suger, element.category, element.id));
     });
- 
-    // const productos = divElement.querySelector('#btnProductos');
-    // productos.addEventListener('click', () => {
-    //     const datos = document.getElementById('containerCentral');
-    //     datos.innerHTML = '';
-    //     let aux;
-    //     verInfoFb('products')
-    //     .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 datos.innerHTML += `<div class="contenedorProducto"  data-price="${doc.data().id}">
-    //                 <img class="fotoProducto" src="${doc.data().img}">
-    //                 <p>${doc.data().name}</p>
-    //                 <p>${doc.data().category}</p>
-    //                 <button type="button"  id ="products" data-set="${doc.id}">Comprar</button>     
-    //                 </div>`
-                  
-    
-    //             });
-    //             const comprarProduct = document.getElementById('products')
-    //                comprarProduct.addEventListener('click',()=>{
-                  
-    //                 console.log(comprarProduct.dataset.set);
-    //                // console.log(aux);
-    //                 addProduct(comprarProduct.dataset.set);
-    //             })
-                
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-
-    // const pastas = divElement.querySelector('#btnPastas');
-    // pastas.addEventListener('click', () => {
-    //     const docu = document.getElementById('containerCentral');
-    //     docu.innerHTML = '';
-    //     verInfoFb('products')
-    //         .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                if(doc.data().category==='pastas'){
-    //                 docu.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-    //                 <img class="fotoProducto" src="${doc.data().img}">
-    //                 <p>${doc.data().name}</p>
-    //                 <button type="button" id="pasta">Comprar</button>    
-    //                 </div>`
-    //                }
-    //                console.log('entramos');
-    //                const comprarPasta = document.getElementById('pasta')
-    //                comprarPasta.addEventListener('click',()=>{
-    //                    console.log('comprarPasta');
-    //                })
-               
-    //             });
-
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-
-
- 
-   
-        
-    
-
-    // const detergentes = divElement.querySelector('#btnDetergentes');
-    // detergentes.addEventListener('click', () => {
-    //     const docum = document.getElementById('containerCentral');
-    //     docum.innerHTML = '';
-    //     verInfoFb('products')
-    //         .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 if (doc.data().category === 'detergentes') {
-    //                     docum.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-    //                     <img class="fotoProducto" src="${doc.data().img}">
-    //                     <p>${doc.data().name}</p>
-    //                     <button type="button">Comprar</button>   </div>`
-    //                 }
-    //             });
-
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-
-    // const aceites = divElement.querySelector('#btnAceites');
-    // aceites.addEventListener('click', () => {
-    //     const documen = document.getElementById('containerCentral');
-    //     documen.innerHTML = '';
-    //     verInfoFb('products')
-    //         .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 if (doc.data().category === 'aceites') {
-    //                     documen.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-    //                     <img class="fotoProducto" src="${doc.data().img}">
-    //                     <p>${doc.data().name}</p>
-    //                     <button type="button" >Comprar</button>  </div>`
-    //                 }
-    //             });
-
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-
-    // const conservas = divElement.querySelector('#btnConservas');
-    // conservas.addEventListener('click', () => {
-    //     const documentt = document.getElementById('containerCentral');
-    //     documentt.innerHTML = '';
-    //     verInfoFb('products')
-    //         .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 if (doc.data().category === 'conservas') {
-    //                     documentt.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-    //                     <img class="fotoProducto" src="${doc.data().img}">
-    //                     <p>${doc.data().name}</p>
-    //                     <p>${doc.data().priceprom}</p>
-    //                     <button type="button" >Comprar</button>   </div>`
-    //                 }
-    //             });
-
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-    // const jabones = divElement.querySelector('#btnJabones');
-    // jabones.addEventListener('click', () => {
-    //     const documento = document.getElementById('containerCentral');
-    //     documento.innerHTML = '';
-    //     verInfoFb('products')
-    //         .then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 if (doc.data().category === 'jabones') {
-    //                     documento.innerHTML += `<div class="contenedorProducto" data-set="${doc.id}" data-price="${doc.data().id}">
-    //                     <img class="fotoProducto" src="${doc.data().img}">
-    //                     <p>${doc.data().name}</p>
-    //                     <button type="button" >Comprar</button>   </div>`
-    //                 }
-    //             });
-
-    //         })
-    //         .catch(() => console.log('error'));
-    // })
-
+    //opcion ALL
+   const productos = divElement.querySelector('#btnProductos');
+   productos.addEventListener('click', () => {
+     const containerProducts = divElement.querySelector('#containerCentral');
+     containerProducts.innerHTML = '';
+     arrayObjetProduct.forEach((element) => {
+      containerProducts.appendChild(itemProducts(element.img, element.name,
+        element.price_prom, element.price_suger, element.category, element.id));
+    });
+   });
+    //opcion Pastas
+    const pastas = divElement.querySelector('#btnPastas');
+    pastas.addEventListener('click', () => {
+      const containerProducts = divElement.querySelector('#containerCentral');
+      containerProducts.innerHTML = '';
+      verInfoFb('products','pastas')
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          containerProducts.appendChild(itemProducts(doc.data().img,
+          doc.data().name, doc.data().price_prom, doc.data().price_suger, doc.data().category,
+          doc.data().id));
+          console.log(doc.data().name);
+        });
+      })
+    });    
+    //opcion Detergentes
+    const detergentes = divElement.querySelector('#btnDetergentes');
+    detergentes.addEventListener('click', () => {
+      const containerProducts = divElement.querySelector('#containerCentral');
+      containerProducts.innerHTML = '';
+      verInfoFb('products','detergentes')
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          containerProducts.appendChild(itemProducts(doc.data().img,
+          doc.data().name, doc.data().price_prom, doc.data().price_suger, doc.data().category,
+          doc.data().id));
+          console.log(doc.data().name);
+        });
+      })
+    });    
+    //opcion Aceites
+    const aceites = divElement.querySelector('#btnAceites');
+    aceites.addEventListener('click', () => {
+      const containerProducts = divElement.querySelector('#containerCentral');
+      containerProducts.innerHTML = '';
+      verInfoFb('products','aceites')
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          containerProducts.appendChild(itemProducts(doc.data().img,
+          doc.data().name, doc.data().price_prom, doc.data().price_suger, doc.data().category,
+          doc.data().id));
+          console.log(doc.data().name);
+        });
+      })
+    });     
+    //opcion Conservas
+    const conservas = divElement.querySelector('#btnConservas');
+    conservas.addEventListener('click', () => {
+      const containerProducts = divElement.querySelector('#containerCentral');
+      containerProducts.innerHTML = '';
+      verInfoFb('products','conservas')
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          containerProducts.appendChild(itemProducts(doc.data().img,
+          doc.data().name, doc.data().price_prom, doc.data().price_suger, doc.data().category,
+          doc.data().id));
+          console.log(doc.data().name);
+        });
+      })
+    });     
+    //opcion Jabones
+    const jabones = divElement.querySelector('#btnJabones');
+    jabones.addEventListener('click', () => {
+      const containerProducts = divElement.querySelector('#containerCentral');
+      containerProducts.innerHTML = '';
+      verInfoFb('products','jabones')
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          containerProducts.appendChild(itemProducts(doc.data().img,
+          doc.data().name, doc.data().price_prom, doc.data().price_suger, doc.data().category,
+          doc.data().id));
+          console.log(doc.data().name);
+        });
+      })
+    }); 
     return divElement;
 }
 

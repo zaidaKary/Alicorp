@@ -1,7 +1,7 @@
-export const verInfoFb = (string) => {
+export const verInfoFb = (string,category) => {
   return firebase
     .firestore()
-    .collection(string)
+    .collection(string).where("category", "==", category)
     .get();
 };
 
