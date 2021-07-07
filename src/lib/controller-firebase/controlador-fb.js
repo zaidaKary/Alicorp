@@ -37,7 +37,9 @@ export const addProduct = async idProduct => {
     arr.push(idProduct);
     let sald = dataUser.data().saldo;
     let price = dataProduct.data().price_prom;
-    
+    let priceSuger = dataProduct.data().price_suger;
+    let ganAcum = dataUser.data().acum;
+     ganAcum = parseInt(ganAcum +(priceSuger-price),10);
     sald = parseInt(sald - price, 10);
   
     firebase
@@ -46,7 +48,9 @@ export const addProduct = async idProduct => {
       .doc(idUser)
       .update({
         products: arr,
-        saldo: sald
+        saldo: sald,
+        acum: ganAcum
+    
       });
   } else {
     alert("Tu credito no es suficiente");
@@ -101,3 +105,13 @@ export const temp = async(idUser) => {
     })));
   return Promise.all(arrPromises);
 };
+
+ export const getUserLogAcum = async() =>{
+  const idUser = firebase.auth().currentUser.uid;
+  const dataUser = await firebase
+    .firestore()
+    .collection("users")
+    .doc(idUser)
+    .get();
+    return(dataUser.data().acum);
+}
